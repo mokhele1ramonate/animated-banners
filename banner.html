@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML5 Banner</title>
+    <style>
+        /* CSS Reset */
+        * { margin: 0; padding: 0; border: 0; }
+        
+        /* Banner Container */
+        #banner-container {
+            width: 300px;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #f7f7f7;
+        }
+ 
+        /* Main Content */
+        #main-content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+ 
+        /* Media Elements */
+        .banner-image {
+            position: absolute;
+            display: none; /* Hide initially */
+            max-width: 100%;
+        }
+ 
+        /* CTA Button */
+        .cta-button {
+            position: absolute;
+            bottom: 15px;
+            left: 100%;
+            transform: translateX(-50%);
+            padding: 8px 24px;
+            background: #ff0000;
+            color: white;
+            border-radius: 25px;
+            font-family: Arial, sans-serif;
+            font-size: 7px;
+            cursor: pointer;
+            opacity: 0; /* Start hidden for animation */
+            max-width: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div id="banner-container">
+        <div id="main-content">
+            <!-- Add your media files here -->
+            <img class="banner-image" id="bg-image" src="assets/background.jpg">
+            <img class="banner-image" id="product-image" src="assets/product.png">
+            <div class="cta-button">View Deals</div>
+        </div>
+    </div>
+ 
+    <script>
+        // Wait for all assets to load
+        window.addEventListener('load', initBanner);
+ 
+        function initBanner() {
+            // Get elements
+            const banner = document.getElementById('banner-container');
+            const images = document.querySelectorAll('.banner-image');
+            const cta = document.querySelector('.cta-button');
+ 
+            // Show initial image
+            images[0].style.display = 'block';
+ 
+            // Animation timeline
+            setTimeout(() => {
+                // Second image animation
+                images[1].style.display = 'block';
+                images[1].style.animation = 'fadeIn 1s forwards';
+                
+                // CTA animation
+cta.style.animation = 'slideUp 0.5s 0.5s forwards';
+            }, 1000);
+ 
+            // Click handler
+            banner.addEventListener('click', function() {
+window.open('https://your-landing-page.com', '_blank');
+            });
+        }
+ 
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { bottom: -30px; opacity: 0; }
+                to { bottom: 15px; opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
