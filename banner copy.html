@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML5 Banner</title>
+    <style>
+        /* CSS Reset */
+        * { margin: 0; padding: 0; border: 0; }
+        
+        /* Banner Container */
+        #banner-container {
+            width: 300px;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #f7f7f7;
+            /* Center the banner container */
+            margin: 0 auto; /* This centers it horizontally */
+            display: flex; /* Using flexbox for internal centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+ 
+        /* Main Content */
+        #main-content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+ 
+        /* Media Elements */
+        .banner-image {
+            position: absolute;
+            display: ; /* You had an empty value here */
+            max-width: 100%;
+        }
+ 
+        /* CTA Button */
+        .cta-button {
+            position: absolute;
+            bottom: 15px;
+            right: 15px; /* Position to the bottom right */
+            /* Remove transform: translateX(-50%); since we're positioning from the right */
+            padding: 8px 24px;
+            background: #066fef;
+            color: white;
+            border-radius: 25px;
+            font-family: Arial, sans-serif;
+            font-size: 7px;
+            cursor: pointer;
+            opacity: 0; /* Start hidden for animation */
+            max-width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Rest of your HTML remains the same -->

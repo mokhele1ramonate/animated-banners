@@ -16,6 +16,7 @@
             overflow: hidden;
             cursor: pointer;
             background: #f7f7f7;
+            margin: 0 auto;
         }
  
         /* Main Content */
@@ -26,29 +27,61 @@
             top: 0;
             left: 0;
         }
+
+        #product-image {
+            top:50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: slideIn 1.3s 0.5s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translate(-150%, -50%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+
+        
  
         /* Media Elements */
         .banner-image {
             position: absolute;
-            display: none; /* Hide initially */
+            
             max-width: 100%;
+            
         }
  
-        /* CTA Button */
-        .cta-button {
+        .cta-wrapper {
             position: absolute;
-            bottom: 15px;
-            left: 100%;
-            transform: translateX(-50%);
+            bottom: 15 px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            opacity: 0;
+        }
+        .cta-button {
+            
             padding: 8px 24px;
-            background: #ff0000;
+            background: #066fef;
             color: white;
             border-radius: 25px;
             font-family: Arial, sans-serif;
             font-size: 7px;
             cursor: pointer;
             opacity: 0; /* Start hidden for animation */
+            max-width: 80px;
+        }
+
+        .cta-icon {
             max-width: 70px;
+            opacity: 0; 
         }
     </style>
 </head>
@@ -56,9 +89,21 @@
     <div id="banner-container">
         <div id="main-content">
             <!-- Add your media files here -->
-            <img class="banner-image" id="bg-image" src="assets/background.jpg">
-            <img class="banner-image" id="product-image" src="assets/product.png">
-            <div class="cta-button">View Deals</div>
+            <img class="banner-image" id="bg-image" src="assets/bg.webp">
+            <img class="banner-image" id="product-image" src="assets/xlt.webp">
+            <div >
+                <div class="cta-wrapper">
+                    <img class="cta-icon" src="assets/ford-logow.webp" alt="">
+                     </img>
+                     <div class="cta-button">
+                        View Deals
+                    </div>
+                </div>
+                
+            </div>
+            <div >
+
+            </div>
         </div>
     </div>
  
@@ -78,7 +123,7 @@
             // Animation timeline
             setTimeout(() => {
                 // Second image animation
-                images[1].style.display = 'block';
+               // images[1].style.display = 'block';
                 images[1].style.animation = 'fadeIn 1s forwards';
                 
                 // CTA animation
@@ -95,15 +140,45 @@ window.open('https://your-landing-page.com', '_blank');
         const style = document.createElement('style');
         style.textContent = `
             @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
+                from { 
+                transform: translate(-150%, -50%);
+                opacity: 0;
+                }
+
+                to {
+                transform: translate(-50%, -50%);
+                opacity: 1; 
+                }
             }
             @keyframes slideUp {
-                from { bottom: -30px; opacity: 0; }
-                to { bottom: 15px; opacity: 1; }
+                from { right: -30px; opacity: 0; }
+                to { right: 15px; opacity: 1; }
+
+                80% { right: 10px; }
+                90% { right: 17px; }
+                100% { right: 15px; }
             }
+            @keyframes iconFade {
+            from {opacity: 0; transform: translateY(-5px);}
+            to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes slideInRight {
+            from {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+                to {
+                transform: translateX(0);
+                opacity: 1;
+                }
+        }
         `;
         document.head.appendChild(style);
+
+        setTimeout(() => {
+            const ctaWrapper = document.querySelector('.cta-wrapper');
+            ctaWrapper.style.animation = 'slideInRight 0.5s 0.5s forwards';
+        }, 1000);
     </script>
 </body>
 </html>
