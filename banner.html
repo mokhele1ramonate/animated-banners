@@ -37,8 +37,8 @@
 }
  
 @keyframes slideIn {
-    from { transform: translate(-150%, calc(-50% - 20%)); }
-    to { transform: translate(-50%, calc(-50% - 20%)); }
+    from { transform: translate(-150%, calc(-50% - 15%)); }
+    to { transform: translate(-50%, calc(-50% - 15%)); }
 }
  
 /* Media Elements */
@@ -73,16 +73,18 @@
 
 .left-column {
     position: absolute;
-    bottom:10px;
-    left: 15px;
+    bottom: 10px;
+    left: 7px;
+    
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap:8px;
-    max-width: 150px;
+    gap:2px;
+    max-width: 190px;
     transform: translateX(-100%);
     opacity: 0;
     animation: slideInFromLeft 0.5s 1s ease-out forwards;
+    
 }
 
 @keyframes slideInFromLeft {
@@ -103,26 +105,65 @@
 
 .left-text {
     font-family: Arial, sans-serif;
-    font-size: 7px;
-    color:blue;
+    font-size: 5px;
+    color:#00095B;
     margin: 0;
+    max-height: 2.4em;
+    line-height: 1.2em;
+    
 }
  
 .cta-button {
-    padding: 8px 24px;
+    padding: 8px 20px;
     background: #066fef;
     color: white;
     border-radius: 25px;
     font-family: Arial, sans-serif;
-    font-size: 4px;
+    font-size: 8px;
     cursor: pointer;
-    max-width: 80px;
+    max-width: 70px;
 }
  
 .cta-icon {
     max-width: 70px;
     display: block;
 }
+
+.fade-image {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    max-width: 250px;
+    
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.right-image {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    max-width: 80px;
+    opacity: 1;
+   
+}
+
+#banner-container:hover .fade-image {
+    opacity: 1;
+}
+
+
+
+
 </style>
 </head>
 <body>
@@ -136,11 +177,13 @@
         </div>
 
         <div class="left-column">
-            <img src="assets/" alt="" class="left-image">
-            <img src="assets/Price.webp" alt="" class="left-image">
-            <p class="left-text"> *Territory Titanium shown. Offer is for Territory Ambiente only.<br><span style="font-size: 3px;">FFS Finance South Africa (Pty) Ltd, trading as Ford Credit, is an Authorised Financial Services Provider (FSP 31946) and Registered Credit Provider (NCRCP 72)</span></p>
+            <img src="assets/get-the-ford-xlt.png" alt="" class="left-image">
+            <img src="assets/Price.webp" alt="price image" class="left-image">
+            <p class="left-text"> FFS Finance South Africa (Pty) Ltd, trading as Ford Credit, is an Authorised<br> Financial Services Provider (FSP 31946) and Registered Credit Provider (NCRCP 72)</p>
             
         </div>
+        <img src="assets/blue-sky-offers.png" alt="fade in image" class="banner-image fade-image">
+        <img src="assets/stacked-logo.webp" alt="right corner image" class="banner-image right-image">
     </div>
 </div>
  
