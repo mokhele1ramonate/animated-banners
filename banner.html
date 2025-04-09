@@ -31,10 +31,25 @@
  
 #product-image {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: slideIn 1s forwards;
+    bottom: 25px;
+    left: 10px; 
+    animation: slideInFromLeft 1s ease forwards;
+    z-index: 3;
+    transition: all 0.8s ease;
+}
+
+/* New animation for center movement */
+@keyframes moveToCenter {
+    from {
+        bottom: 25px;
+        left: 10px;
+        transform: translate(0, 0);
+    }
+    to {
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 40%);
+    }
 }
  
 @keyframes slideIn {
@@ -56,7 +71,6 @@
     pointer-events: none;
 }
 .banner-image {
-    
     max-width: 100%;
     position: absolute;
     top: 0;
@@ -69,7 +83,6 @@
     border: 0;
     box-sizing: border-box;
     outline: none;
-    
 }
 
 .top-image-first {
@@ -77,10 +90,20 @@
     max-width: 200px;
     left: 8px;
     top: 15px;
-    
     margin-top: 8px;
     pointer-events: auto;
-    
+    transition: opacity 0.5s ease;
+}
+
+.blue-sky-offers {
+    position: absolute;
+    max-width: 200px;
+    left: 8px;
+    top: 15px;
+    margin-top: 8px;
+    pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 .top-image-second {
@@ -88,32 +111,23 @@
     top: 15px;
     right: 25px;
     max-width: 100%;
-    
- 
-    
-    
-
-    
 }
 
-
-
-
 #bg-image {
-   
     z-index: 0;
 }
 
-#product-image {
-    z-index: 3;
-}
+@keyframes slideInFromLeft {
+    from {
+        left: -100%;
+        opacity: 0;
+    }
+    to {
+        left: 10px;
+        opacity: 1;
+    }
+} 
 
-
- 
-
-
-
- 
 @keyframes slideUpFromRight {
     from {
         transform: translateX(100%);
@@ -127,69 +141,55 @@
 
 .left-column {
     position: absolute;
-    bottom:10px;
+    bottom: 10px;
     left: 15px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     max-width: 200px;
     transform: translateX(0);
-    opacity: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
 }
 
 .price-image {
     max-width: 100%;
     display: block;
-    transition: opacity 0.5s ease; /* smooth fade transition */
+    opacity: 0; /* Start hidden for fade-in */
+    transition: opacity 0.5s ease;
+}
+.left-column :not(.price-image) {
+    transition: opacity 0.5s ease;
 }
 
 .left-column .hidden {
     display: none;
 }
 
-@keyframes fadePrice {
-    0% {
-        opacity: 1; 
-    }
-    50% {
-        opacity: 1; 
-    }
-    50.1% {
-        opacity: 0; 
-        content: url("assets/Price.webp"); 
-    }
-    58.33% {
-        opacity: 0; 
-        content: url("assets/family-promise.png"); 
-    }
-    66.67% {
-        opacity: 1; 
-    }
-    100% {
-        opacity: 1; 
-    }
-}
-@keyframes slideInFromLeft {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
 .left-image {
     max-width: 100%;
     display: block;
+    transition: opacity 0.5s ease;
 }
 
 .left-text {
     font-family: Arial, sans-serif;
+    padding-top: 4px;
     font-size: 5px;
     color:#00095B;
     margin: 0;
+    transition: opacity 0.5s ease;
+}
+
+.frame-3-left-text {
+    font-family: Arial, sans-serif;
+    padding-top: 4px;
+    font-size: 5px;
+    color:#00095B;
+    margin: 0;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.5s ease;
 }
  
 .cta-group {
@@ -230,16 +230,12 @@
         </video>
 
         <div class="top-images-container">
-          
-                <img src="assets/blue-sky-offers.png" alt="" class="top-image-first">
-           
-           
-                <img src="assets/stacked-logo.webp" alt="" class="top-image-second">
-            
-            
+            <img src="assets/first-frame-headline.png" alt="" class="top-image-first">
+            <img src="assets/blue-sky-offers.png" alt="" class="blue-sky-offers">
+            <img src="assets/stacked-logo.webp" alt="" class="top-image-second">
         </div>
         
-        <img  id="product-image" src="assets/xlt.webp">
+        <img id="product-image" src="assets/xlt.webp">
         <div class="cta-group">
             <img class="cta-icon" src="assets/ford-logow.webp" alt="">
             <div class="cta-button">View Deals</div>
@@ -248,75 +244,96 @@
         <div class="left-column">
             <img src="assets/get-the-ford.png" alt="" class="left-image">
             <img src="assets/Price.webp" alt="" class="left-image price-image">
-            <p class="left-text">FFS Finance South Africa (Pty) Ltd, trading as Ford Credit, is an Authorised <br>Financial Services Provider (FSP 31946) and Registered Credit Provider (NCRCP 72) </span></p>
-            
+            <p class="left-text">FFS Finance South Africa (Pty) Ltd, trading as Ford Credit, is an Authorised <br>Financial Services Provider (FSP 31946) and Registered Credit Provider (NCRCP 72)</p>
+            <p class="frame-3-left-text">*Terms and conditions apply. Offers valid until April 30, 2025. <br>See your local Ford dealer for complete details.</p>
         </div>
     </div>
 </div>
  
 <script>
-// Wait for all assets to load
-window.addEventListener('load', initBanner);
+    window.addEventListener('load', initBanner);
 
-function initBanner() {
-    const banner = document.getElementById('banner-container');
-    banner.addEventListener('click', () => {
-        window.open('https://google.com', '_blank');
-    });
+    function initBanner() {
+        const banner = document.getElementById('banner-container');
+        banner.addEventListener('click', () => {
+            window.open('https://google.com', '_blank');
+        });
+    
+        const images = document.querySelectorAll('.banner-image');
+        images[0].style.display = 'block';
+    
+        const priceImage = document.querySelector('.price-image');
+        const leftColumn = document.querySelector('.left-column');
+        const firstLeftImage = document.querySelector('.left-image:not(.price-image)'); // get-the-ford.png
+        const leftText = document.querySelector('.left-text');
+        const frame3LeftText = document.querySelector('.frame-3-left-text');
+        const productImage = document.getElementById('product-image');
+        const topImageFirst = document.querySelector('.top-image-first');
+        const blueSkyOffers = document.querySelector('.blue-sky-offers');
+    
+        const imageSequence = [
+            'assets/Price.webp',
+            'assets/new-price-image.webp',
+            'assets/third-price-image.webp'
+        ];
+        let currentIndex = 0;
+        let rotationInterval;
 
-    const images = document.querySelectorAll('.banner-image');
-    images[0].style.display = 'block';
-
-    // Image rotation logic
-    const priceImage = document.querySelector('.price-image');
-    const leftColumn = document.querySelector('.left-column');
-    const otherItems = leftColumn.querySelectorAll(':not(.price-image)'); // Select all except .price-image
-
-    const imageSequence = [
-        'assets/Price.webp',           // First image
-        'assets/get-the-ford.png', // Second image
-        'assets/family-promise.png' // Third image
-    ];
-    let currentIndex = 0;
-
-    function updateImage() {
-        // Fade out current image
-        priceImage.style.opacity = '0';
-
+        // Initially hide left-column
+        leftColumn.style.opacity = '0';
+    
+        // Frame 2: After 6 seconds
         setTimeout(() => {
-            // Update to next image
-            currentIndex = (currentIndex + 1) % imageSequence.length; // Loop back to 0 after last image
-            priceImage.src = imageSequence[currentIndex];
-            priceImage.style.opacity = '1'; // Fade in new image
-
-            // Show/hide other items based on current image
-            if (currentIndex === 0) {
-                // When Price.webp is showing, make other items visible
-                otherItems.forEach(item => {
-                    item.classList.remove('hidden');
-                    setTimeout(() => {
-                        item.style.opacity = '1'; // Fade in
-                    }, 10); // Small delay to ensure display is set first
-                });
-            } else {
-                // When other images show, hide other items
-                otherItems.forEach(item => {
-                    item.style.opacity = '0'; // Fade out
-                    setTimeout(() => {
-                        item.classList.add('hidden'); // Hide completely after fade
-                    }, 500); // Match transition duration
-                });
-            }
-        }, 500); // Delay matches fade-out duration
+            productImage.style.animation = 'moveToCenter 1s ease forwards';
+            leftColumn.style.transition = 'opacity 1s ease';
+            leftColumn.style.opacity = '1';
+            
+            // Fade in Price.webp with the left column
+            priceImage.style.transition = 'opacity 0.5s ease';
+            priceImage.style.opacity = '1';
+            
+            frame3LeftText.style.display = 'none'; // Keep hidden until Frame 3
+            
+            topImageFirst.style.opacity = '0';
+            setTimeout(() => {
+                blueSkyOffers.style.opacity = '1';
+            }, 300);
+            rotationInterval = startPriceImageRotation(); // Start price rotation
+        }, 6000);
+    
+        // Frame 3: After 12 seconds
+        setTimeout(() => {
+            // Fade out initial left text only
+            leftText.style.transition = 'opacity 0.5s ease';
+            leftText.style.opacity = '0';
+            
+            // After fade out completes
+            setTimeout(() => {
+                // Hide initial text
+                leftText.style.display = 'none';
+                
+                // Keep get-the-ford.png and Price.webp visible
+                // Fade in frame-3-left-text
+                frame3LeftText.style.transition = 'opacity 0.5s ease';
+                frame3LeftText.style.opacity = '0';
+                frame3LeftText.style.display = 'block';
+                setTimeout(() => {
+                    frame3LeftText.style.opacity = '1';
+                }, 50);
+            }, 500); // Wait for fade out to complete (0.5s)
+        }, 12000);
+    
+        function startPriceImageRotation() {
+            return setInterval(() => {
+                priceImage.style.opacity = '0';
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % imageSequence.length;
+                    priceImage.src = imageSequence[currentIndex];
+                    priceImage.style.opacity = '1';
+                }, 300);
+            }, 4000);
+        }
     }
-
-    // Start rotation after 6 seconds, then every 6 seconds
-    setTimeout(() => {
-        updateImage(); // First swap
-        setInterval(updateImage, 6000); // Repeat every 6 seconds
-    }, 6000);
-}
 </script>
 </body>
 </html>
- 
